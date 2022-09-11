@@ -8,7 +8,7 @@ public class EnemyMover : MonoBehaviour
     [SerializeField] [Range(0f, 5f)] float speed = 1f;
     
     // Start is called before the first frame update
-    void Start() {
+    void OnEnable() {
         FindPath();
         ReturnToStart();
         StartCoroutine(FollowPath());
@@ -43,6 +43,6 @@ public class EnemyMover : MonoBehaviour
             }
         }
 
-        Destroy(gameObject);
+        gameObject.SetActive(false);
     }
 }
