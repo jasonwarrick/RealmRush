@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
+[RequireComponent(typeof(TextMeshPro))]
 [ExecuteAlways] // Runs in the editor
 public class CoordinateLabeler : MonoBehaviour
 {
@@ -26,7 +27,7 @@ public class CoordinateLabeler : MonoBehaviour
             TextUpdates();
         }
 
-        ColorCoordinates();
+        SetLabelColor();
         ToggleLabels();
     }
 
@@ -36,7 +37,7 @@ public class CoordinateLabeler : MonoBehaviour
         }
     }
 
-    void ColorCoordinates() {
+    void SetLabelColor() {
         if (waypoint.IsPlacable) {
             label.color = defaultColor;
         } else {
@@ -50,7 +51,7 @@ public class CoordinateLabeler : MonoBehaviour
     }
 
     void DisplayCoordinates() {
-        float snapDistance = UnityEditor.EditorSnapSettings.move.x;
+        float snapDistance = UnityEditor.EditorSnapSettings.move.x; // Using editor settings in code creates errors in the build, put this script in the editor folder before building
         coordinates.x = Mathf.RoundToInt(transform.parent.position.x / snapDistance);
         coordinates.y = Mathf.RoundToInt(transform.parent.position.z / snapDistance);
         label.text = coordinates.x + "," + coordinates.y;
