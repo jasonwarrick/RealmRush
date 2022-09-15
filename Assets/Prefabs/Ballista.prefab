@@ -4852,7 +4852,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   weapon: {fileID: 3144582324300694500}
   projectileParticles: {fileID: 198296751694926726}
-  towerRange: 15
+  towerRange: 17.5
 --- !u!114 &-2887359229648064946
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4865,6 +4865,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: da305b109e573bc4795e11cd20a165f3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  cost: 75
 --- !u!1 &6131056645070147807
 GameObject:
   m_ObjectHideFlags: 0
