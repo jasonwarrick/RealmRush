@@ -10,21 +10,24 @@ public class CoordinateLabeler : MonoBehaviour
 {
     [SerializeField] Color defaultColor = Color.white;
     [SerializeField] Color blockedColor = Color.gray;
+    [SerializeField] Color exploredColor = Color.yellow;
+    [SerializeField] Color pathColor = new Color(1f, 0.5f, 0f); // Orange
 
     TextMeshPro label;
     Vector2Int coordinates = new Vector2Int();
-    Waypoint waypoint;
+    GridManager gridManager;
 
     void Awake() {
         label = GetComponent<TextMeshPro>();
-        waypoint = GetComponentInParent<Waypoint>();
-        TextUpdates();
-        label.enabled = false;
+        gridManager = GetComponent<GridManager>();
+        label.enabled = true;
+
+        UpdateText();
     }
 
     void Update() {
         if(!Application.isPlaying) { // ONLY run the code when the game isn't running
-            TextUpdates();
+            UpdateText();
         }
 
         SetLabelColor();
@@ -38,14 +41,24 @@ public class CoordinateLabeler : MonoBehaviour
     }
 
     void SetLabelColor() {
-        if (waypoint.IsPlacable) {
-            label.color = defaultColor;
-        } else {
+        if (gridManager == null) { return; }
+
+        Node node = gridManager.GetNode(coordinates);
+
+        if (node == null) { return; }
+
+        if (!node.isWalkable) {
             label.color = blockedColor;
+        } else if (node.isPath) {
+            label.color = pathColor;
+        } else if (node.isExplored) {
+            label.color = exploredColor;
+        } else {
+            label.color = defaultColor;
         }
     }
 
-    void TextUpdates() {
+    void UpdateText() {
         DisplayCoordinates();
         UpdateName();
     }

@@ -22,7 +22,6 @@ public class EnemyHealth : MonoBehaviour
 
     private void ProcessHit() {
         currentHP -= 1;
-        Debug.Log(currentHP);
         if (currentHP <= 0) {
             enemy.RewardGold();
             maxHP += difficultyRamp;

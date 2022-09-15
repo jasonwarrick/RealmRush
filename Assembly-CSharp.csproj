@@ -45,6 +45,8 @@
      <Compile Include="Assets\Scripts\EnemyMover.cs" />
      <Compile Include="Assets\Scripts\Bank.cs" />
      <Compile Include="Assets\Scripts\Tower.cs" />
+     <Compile Include="Assets\Scripts\Node.cs" />
+     <Compile Include="Assets\Scripts\GridManager.cs" />
      <None Include="Assets\AssetPacks\TextMesh Pro\Shaders\TMPro.cginc" />
      <None Include="Assets\AssetPacks\TextMesh Pro\Shaders\TMP_SDF-Mobile Overlay.shader" />
      <None Include="Assets\AssetPacks\TextMesh Pro\Shaders\TMP_Bitmap.shader" />
