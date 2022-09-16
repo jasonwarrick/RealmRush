@@ -19,7 +19,7 @@ public class CoordinateLabeler : MonoBehaviour
 
     void Awake() {
         label = GetComponent<TextMeshPro>();
-        gridManager = GetComponent<GridManager>();
+        gridManager = FindObjectOfType<GridManager>();
         label.enabled = true;
 
         UpdateText();
@@ -45,7 +45,7 @@ public class CoordinateLabeler : MonoBehaviour
 
         Node node = gridManager.GetNode(coordinates);
 
-        if (node == null) { return; }
+        if (node == null) {  return; }
 
         if (!node.isWalkable) {
             label.color = blockedColor;
