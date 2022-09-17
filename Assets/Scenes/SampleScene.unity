@@ -7782,6 +7782,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 513840280}
     m_Modifications:
+    - target: {fileID: 412633316937749929, guid: f83562486deb5304d8151f9c7b7bc39b, type: 3}
+      propertyPath: isPlaceable
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2506956130913278628, guid: f83562486deb5304d8151f9c7b7bc39b, type: 3}
       propertyPath: m_RootOrder
       value: 33
@@ -9466,6 +9470,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 513840280}
     m_Modifications:
+    - target: {fileID: 412633316937749929, guid: f83562486deb5304d8151f9c7b7bc39b, type: 3}
+      propertyPath: isPlaceable
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2506956130913278628, guid: f83562486deb5304d8151f9c7b7bc39b, type: 3}
       propertyPath: m_RootOrder
       value: 227
@@ -11593,7 +11601,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4a3660357f946d24ba0cb9ba221a1ec2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gridSize: {x: 5, y: 5}
+  gridSize: {x: 10, y: 10}
+  unityGridSize: 10
 --- !u!4 &626285694
 Transform:
   m_ObjectHideFlags: 0
@@ -18575,7 +18584,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2506956130913278628, guid: be11fc6b92d22ab4fb44d06331e86236, type: 3}
       propertyPath: m_RootOrder
-      value: 7
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 2506956130913278628, guid: be11fc6b92d22ab4fb44d06331e86236, type: 3}
       propertyPath: m_LocalPosition.x
@@ -20928,7 +20937,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2506956130913278628, guid: be11fc6b92d22ab4fb44d06331e86236, type: 3}
       propertyPath: m_RootOrder
-      value: 6
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 2506956130913278628, guid: be11fc6b92d22ab4fb44d06331e86236, type: 3}
       propertyPath: m_LocalPosition.x
@@ -32291,6 +32300,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 513840280}
     m_Modifications:
+    - target: {fileID: 412633316937749929, guid: f83562486deb5304d8151f9c7b7bc39b, type: 3}
+      propertyPath: isPlaceable
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2506956130913278628, guid: f83562486deb5304d8151f9c7b7bc39b, type: 3}
       propertyPath: m_RootOrder
       value: 47
@@ -33311,8 +33324,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 345b625b313a18e4fb73a87611132703, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startCoordinates: {x: 0, y: 0}
-  endCoordinates: {x: 4, y: 2}
+  startCoordinates: {x: 3, y: 1}
+  endCoordinates: {x: 6, y: 8}
 --- !u!1001 &2042437722
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -35490,6 +35503,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5141555561699865846, guid: f3d90deb05d75c745a545c4ba6da8379, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5141555561699865847, guid: f3d90deb05d75c745a545c4ba6da8379, type: 3}
+      propertyPath: poolSize
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []

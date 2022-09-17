@@ -42,15 +42,16 @@ public class CoordinateLabeler : MonoBehaviour
 
     void SetLabelColor() {
         if (gridManager == null) { return; }
-
+        
         Node node = gridManager.GetNode(coordinates);
 
         if (node == null) {  return; }
-
+        
         if (!node.isWalkable) {
             label.color = blockedColor;
         } else if (node.isPath) {
             label.color = pathColor;
+            Debug.Log("test");
         } else if (node.isExplored) {
             label.color = exploredColor;
         } else {
@@ -64,9 +65,10 @@ public class CoordinateLabeler : MonoBehaviour
     }
 
     void DisplayCoordinates() {
-        float snapDistance = UnityEditor.EditorSnapSettings.move.x; // Using editor settings in code creates errors in the build, put this script in the editor folder before building
-        coordinates.x = Mathf.RoundToInt(transform.parent.position.x / snapDistance);
-        coordinates.y = Mathf.RoundToInt(transform.parent.position.z / snapDistance);
+        if (gridManager == null) { return; }
+        
+        coordinates.x = Mathf.RoundToInt(transform.parent.position.x / gridManager.UnityGridSize);
+        coordinates.y = Mathf.RoundToInt(transform.parent.position.z / gridManager.UnityGridSize);
         label.text = coordinates.x + "," + coordinates.y;
     }
 
