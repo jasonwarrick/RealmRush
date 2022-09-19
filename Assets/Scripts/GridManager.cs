@@ -51,9 +51,8 @@ public class GridManager : MonoBehaviour
     public Vector3 GetPositionFromCoordinates(Vector2Int coordinates) {
         Vector3 position = new Vector3();
 
-        position.x = position.x * unityGridSize;
-        position.y = 0f;
-        position.z = position.z * unityGridSize;
+        position.x = coordinates.x * unityGridSize;
+        position.z = coordinates.y * unityGridSize;
 
         return position;
     }

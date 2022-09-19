@@ -16,9 +16,7 @@ public class Tile : MonoBehaviour
     void Awake() {
         gridManager = FindObjectOfType<GridManager>();
         pathfinder = FindObjectOfType<Pathfinder>();
-    }
 
-    void Start() {
         if (gridManager != null) {
             coordinates = gridManager.GetCoordinatesFromPosition(transform.position);
 
@@ -28,11 +26,24 @@ public class Tile : MonoBehaviour
         }
     }
 
+    // void Start() {
+    //     if (gridManager != null) {
+    //         coordinates = gridManager.GetCoordinatesFromPosition(transform.position);
+
+    //         if (!isPlaceable) {
+    //             gridManager.BlockNode(coordinates);
+    //         }
+    //     }
+    // }
+
     void OnMouseDown() {
-        if (gridManager.GetNode(coordinates).isWalkable && !pathfinder.WillBlockPath(coordinates))  {
-            bool isPlaced = towerPrefab.CreateTower(towerPrefab, transform.position);
-            isPlaceable = !isPlaced;
-            gridManager.BlockNode(coordinates);
+        if (gridManager.GetNode(coordinates).isWalkable && !pathfinder.WillBlockPath(coordinates)) {
+            bool isSuccessful = towerPrefab.CreateTower(towerPrefab, transform.position);
+            Debug.Log(isSuccessful);
+            if (isSuccessful) {
+                gridManager.BlockNode(coordinates);
+                pathfinder.NotifyReceivers();
+            }
         }
     }
 }

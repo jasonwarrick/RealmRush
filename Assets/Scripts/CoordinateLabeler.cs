@@ -51,7 +51,6 @@ public class CoordinateLabeler : MonoBehaviour
             label.color = blockedColor;
         } else if (node.isPath) {
             label.color = pathColor;
-            Debug.Log("test");
         } else if (node.isExplored) {
             label.color = exploredColor;
         } else {

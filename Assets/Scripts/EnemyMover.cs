@@ -5,52 +5,50 @@ using UnityEngine;
 [RequireComponent(typeof(Enemy))]
 public class EnemyMover : MonoBehaviour
 {
-    [SerializeField] List<Tile> path = new List<Tile>();
     [SerializeField] [Range(0f, 5f)] float speed = 1f;
 
-    Enemy enemy;
+    List<Node> path = new List<Node>();
 
-    void Start() {
+    Enemy enemy;
+    GridManager gridManager;
+    Pathfinder pathfinder;
+
+    void Awake() {
         enemy = FindObjectOfType<Enemy>();
+        gridManager = FindObjectOfType<GridManager>();
+        pathfinder = FindObjectOfType<Pathfinder>();
     }
     
     // Start is called before the first frame update
     void OnEnable() {
-        FindPath();
+        RecalculatePath();
         ReturnToStart();
         StartCoroutine(FollowPath());
     }
 
-    void FindPath() {
+    void RecalculatePath() {
         path.Clear();
 
-        GameObject parent = GameObject.FindGameObjectWithTag("Path"); // Get the parent object
-
-        foreach (Transform child in parent.transform) { // Loop through the children of that parent (all path tiles) IN ORDER
-            Tile waypoint = child.GetComponent<Tile>();
-
-            if (waypoint != null) {
-                path.Add(child.GetComponent<Tile>()); // Add them to the path list
-            }
-        }
+        path = pathfinder.GetNewPath();
     }
 
     void ReturnToStart() {
-        transform.position = path[0].transform.position;
+        transform.position = gridManager.GetPositionFromCoordinates(pathfinder.StartCoordinates);
     }
 
-    IEnumerator FollowPath()
-    { // IEnumerator makes the method a coroutine
-        foreach (Tile waypoint in path)
-        {
-            Vector3 startPosition = transform.position;
-            Vector3 endPosition = waypoint.transform.position;
+    IEnumerator FollowPath() { // IEnumerator makes the method a coroutine
+        Vector3 startPosition;
+        Vector3 endPosition;
+
+        for (int i = 0; i < path.Count; i++) {
+            startPosition = transform.position;
+            endPosition = gridManager.GetPositionFromCoordinates(path[i].coordinates);
+            
             float travelPercent = 0f; // Resets the travel counter so it always starts from 0
 
             transform.LookAt(endPosition); // Rotates the enemy to face in its movement direction
 
-            while (travelPercent < 1f)
-            {
+            while (travelPercent < 1f) {
                 travelPercent += Time.deltaTime * speed; // Makes travelPercent an incrementer for the time
                 transform.position = Vector3.Lerp(startPosition, endPosition, travelPercent);
                 yield return new WaitForEndOfFrame(); // Restarts or breaks from the while loop after a frame is completed
