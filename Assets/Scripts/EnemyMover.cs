@@ -21,15 +21,23 @@ public class EnemyMover : MonoBehaviour
     
     // Start is called before the first frame update
     void OnEnable() {
-        RecalculatePath();
         ReturnToStart();
-        StartCoroutine(FollowPath());
+        RecalculatePath(true);
     }
 
-    void RecalculatePath() {
-        path.Clear();
+    void RecalculatePath(bool resetPath) {
+        Vector2Int coordinates = new Vector2Int();
 
-        path = pathfinder.GetNewPath();
+        if (resetPath) {
+            coordinates = pathfinder.StartCoordinates;
+        } else {
+            coordinates = gridManager.GetCoordinatesFromPosition(transform.position);
+        }
+        
+        StopAllCoroutines(); // New path won't conflict with existing path following
+        path.Clear();
+        path = pathfinder.GetNewPath(coordinates);
+        StartCoroutine(FollowPath());
     }
 
     void ReturnToStart() {
@@ -40,7 +48,7 @@ public class EnemyMover : MonoBehaviour
         Vector3 startPosition;
         Vector3 endPosition;
 
-        for (int i = 0; i < path.Count; i++) {
+        for (int i = 1; i < path.Count; i++) {
             startPosition = transform.position;
             endPosition = gridManager.GetPositionFromCoordinates(path[i].coordinates);
             

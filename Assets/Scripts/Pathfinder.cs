@@ -35,10 +35,14 @@ public class Pathfinder : MonoBehaviour
         GetNewPath();
     }
 
-    public List<Node> GetNewPath() {
+    public List<Node> GetNewPath(Vector2Int coordinates) { // Overloaded GetNewPath that allows us to give coordinates to the BFS
         gridManager.ResetNodes();
-        BreadthFirstSearch();
+        BreadthFirstSearch(coordinates);
         return BuildPath();
+    }
+
+    public List<Node> GetNewPath() { // BFS defaults to startCoordinates
+        return GetNewPath(startCoordinates);
     }
 
     void ExploreNeighbors() {
@@ -61,7 +65,7 @@ public class Pathfinder : MonoBehaviour
         }
     }
 
-    void BreadthFirstSearch() {
+    void BreadthFirstSearch(Vector2Int coordinates) {
         startNode.isWalkable = true;
         endNode.isWalkable = true;
 
@@ -70,8 +74,8 @@ public class Pathfinder : MonoBehaviour
 
         bool isRunning = true;
 
-        frontier.Enqueue(startNode);
-        reached.Add(startCoordinates, startNode); // Move onto the second node
+        frontier.Enqueue(grid[coordinates]);
+        reached.Add(coordinates, grid[coordinates]); // BFS now starts from any given coordinates
 
         while (frontier.Count > 0 && isRunning) { // Loop until all of the frontier is reached, or until it's told to stop
             currentSearchNode = frontier.Dequeue();
@@ -120,6 +124,6 @@ public class Pathfinder : MonoBehaviour
     }
 
     public void NotifyReceivers() {
-        BroadcastMessage("RecalculatePath", SendMessageOptions.DontRequireReceiver);
+        BroadcastMessage("RecalculatePath", false, SendMessageOptions.DontRequireReceiver);
     }
 }
