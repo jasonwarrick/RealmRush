@@ -43,6 +43,7 @@ public class Tower : MonoBehaviour
 
             foreach (Transform grandchild in transform) {
                 grandchild.gameObject.SetActive(true);
+                
             }
         }
     }
