@@ -31,6 +31,16 @@ public class Bank : MonoBehaviour
         }
     }
 
+    void Update() {
+        GetInput();
+    }
+
+    void GetInput() {
+        if (Input.GetKeyDown(KeyCode.R)) {
+            ReloadScene();
+        }
+    }
+
     void ReloadScene() {
         Scene currentScene = SceneManager.GetActiveScene();
         SceneManager.LoadScene(currentScene.buildIndex);
